@@ -6,17 +6,6 @@ app = FastAPI()
 
 service = MtPyDataWorldService()
 
-@app.get("/my-first-api")
-def hello(name = None):
-
-    if name is None:
-        text = 'Hello!'
-
-    else:
-        text = 'Hello ' + name + '!'
-
-    return text
-
 @app.get("/online_dating_sim")
 def runOnlineDating():
     return service.runOnlineDatingSim()
@@ -24,7 +13,7 @@ def runOnlineDating():
 @app.get("/search_engine")
 def runSearch(q = None):
     if q is None:
-        raise HTTPException(status_code=404, detail="q is null")
+        raise HTTPException(status_code=400, detail="q is null")
     return service.runSearchEngine(q)
 
 @app.get("/weather_predictor")

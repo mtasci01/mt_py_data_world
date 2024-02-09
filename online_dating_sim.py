@@ -3,6 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.preprocessing import MinMaxScaler
+import logging
  
 #We simulate a dating app where users give positive/negative ratings to other users.
 #This program is meant to be a JOKE and not serious. 
@@ -31,6 +32,7 @@ class OnlineDatingSim:
     IXSEX = LENIMGARR + 5
     IXAGE = LENIMGARR + 6
     IXSALARY = LENIMGARR + 7
+    logging.basicConfig(level = logging.INFO)
 
     def random_img(self, width, height):
 
@@ -91,6 +93,7 @@ class OnlineDatingSim:
         return users    
 
     def runModel(self, nPers):
+        logging.info("Running runModel with " + str(nPers) + " nPers")
 
         ratings = []
         trexs = []
@@ -166,6 +169,7 @@ class OnlineDatingSim:
         maxKnnAccuracy = 0
         bestK = 0
         for k in range(2, 20):
+            logging.info("Running knn with " + str(k) + " k")
             knn = KNeighborsClassifier(n_neighbors=k) 
             
             knn.fit(X_train, y_train) 

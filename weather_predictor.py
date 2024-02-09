@@ -12,7 +12,8 @@ class WeatherPredictor:
 
   #this program is meant to be a weather forecast application. We try to guess the amount of rain in a place, given previous
   #forecasts in the same place and in nearby coordinates (ideally in a circle). The data is based on https://open-meteo.com/
-  #WARNING this is not meant to be a usable program with real data, just a demo.
+  #WARNING this is not meant to be a usable program with real data, just a demo. Given the small amount of data we are happy with 
+  #overfitting.
   #the target is a categorical value for the amount of rain (high,low,none). the input is a sequence of hourly forecasts, concatenated
 
   scaler = MinMaxScaler() #normalize X to 0 - 1
@@ -72,7 +73,7 @@ class WeatherPredictor:
     
           X_train, X_test, y_train, y_test = train_test_split(trexsScaled, ys, test_size=0.1)
           
-          return X_train, X_test, y_train, y_test
+          return trexsScaled, ys, X_train, X_test, y_train, y_test
   
   def runPredictions(self, model, X_test, y_test):
       predictions = model.predict(X_test)
@@ -90,16 +91,16 @@ class WeatherPredictor:
         obj["y_test"] = str(y_test[i])
         obj["prediction"] = str(pred)
         retList.append(obj)
-      ret["retList"]= retList
       ret["tot"]=tot
       ret["right"]=right
       ret["tot_right_ratio"]=right/tot
+      ret["retList"]= retList
       return ret   
 
   def runANNCatModel(self):
       
-          X_train, X_test, y_train, y_test = self.getTrainTest()
-          n_features = X_train.shape[1]
+          trexsScaled, ys,X_train, X_test, y_train, y_test = self.getTrainTest()
+          n_features = trexsScaled.shape[1]
           nOutputs = 3
 
           model = tf.keras.Sequential()
@@ -107,9 +108,9 @@ class WeatherPredictor:
           model.add(tf.keras.layers.Dense(nOutputs, activation='softmax'))
 
           model.compile(loss='sparse_categorical_crossentropy', optimizer=tf.keras.optimizers.Adam(), metrics=['accuracy'])
-          model.fit(X_train, y_train, epochs=500, batch_size=10000)
+          model.fit(trexsScaled, ys, epochs=500, batch_size=10000)
 
-          return self.runPredictions(model,X_test, y_test)
+          return self.runPredictions(model,trexsScaled, ys)
 
 
           

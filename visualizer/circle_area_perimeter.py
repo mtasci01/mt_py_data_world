@@ -2,7 +2,7 @@ import math
 
 from matplotlib import pyplot as plt
 
-#the greater the area of our knowledge, the greater th perimeter of our ignorance
+#the greater the area of our knowledge, the greater the perimeter of our ignorance
 
 xs2=[]
 ys2=[]

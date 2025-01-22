@@ -1,7 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 
-#recursively drawing a circle ad the edge of an open boundary
+#recursively drawing a circle at the edge of an open boundary
 
 iter_num = 7
 start_radius = 5

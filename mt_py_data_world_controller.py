@@ -20,3 +20,7 @@ def runSearch(q = None):
 def runWeatherPredictor(m = None):
     return service.runWeatherPredictor(m)
 
+@app.get("/gospel_analysis")
+def gospel_analysis():
+    return service.gospel_analysis()
+

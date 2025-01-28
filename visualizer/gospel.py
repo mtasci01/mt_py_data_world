@@ -2,6 +2,7 @@ import json
 import requests
 from matplotlib import pyplot as plt
 
+# visualizing word frequencies in the gospels
 
 MAX_COUNT_RESULTS = 50
 HORIZONTAL_CHART = True

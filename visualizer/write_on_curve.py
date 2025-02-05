@@ -13,8 +13,6 @@ ax = fig.add_subplot(projection='3d')
 
 n = 100
 
-# For each set of style and range settings, plot n random points in the box
-# defined by x in [23, 32], y in [0, 100], z in [zlow, zhigh].
 for m, zlow, zhigh in [('o', -50, -25), ('^', -30, -5)]:
     xs = randrange(n, 23, 32)
     ys = randrange(n, 0, 100)

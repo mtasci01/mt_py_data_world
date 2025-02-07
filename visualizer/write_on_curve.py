@@ -1,23 +1,21 @@
+
 import matplotlib.pyplot as plt
-import numpy as np
-
-# Fixing random state for reproducibility
-np.random.seed(19680801)
-
-
-def randrange(n, vmin, vmax):
-    return (vmax - vmin)*np.random.rand(n) + vmin
 
 fig = plt.figure()
 ax = fig.add_subplot(projection='3d')
 
-n = 100
 
-for m, zlow, zhigh in [('o', -50, -25), ('^', -30, -5)]:
-    xs = randrange(n, 23, 32)
-    ys = randrange(n, 0, 100)
-    zs = randrange(n, zlow, zhigh)
-    ax.scatter(xs, ys, zs, marker=m)
+def draw_line(line_or,line_vecadd, marker, n_steps, step_size):  
+    
+    for i in range(n_steps):
+        l = i*step_size
+        x = line_or[0] + l*line_vecadd[0]
+        y = line_or[1] +l*line_vecadd[1]
+        ax.scatter(x, y, 0, marker=marker)
+
+
+draw_line([2,2],[2,2], 'x', 20,0.05)
+draw_line([4,2],[-2,2], 'o', 20,0.05)
 
 ax.set_xlabel('X Label')
 ax.set_ylabel('Y Label')

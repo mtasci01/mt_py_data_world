@@ -49,8 +49,10 @@ for i in range(5):
         circles_list.append(circle)   
        
 
-for c in circles_list:
-    ax.add_patch(c)    
+for c1 in circles_list:
+    ax.add_patch(c1)    
+    for c2 in circles_list:
+        plt.plot([c1.get_center()[0],c2.get_center()[0]],[c1.get_center()[1],c2.get_center()[1]])
 
 ax.set_xlim(-50, 50)
 ax.set_ylim(-50, 50)
